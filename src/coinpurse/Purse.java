@@ -7,7 +7,7 @@ public class Purse {
 	private int capacity;
 	private double balance;
 	List<Coin> money = new ArrayList<Coin>();
-
+	
 	Purse(int capacity) {
 		this.capacity = capacity;
 		this.balance = 0;
