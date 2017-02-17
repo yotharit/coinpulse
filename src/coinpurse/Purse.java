@@ -2,11 +2,12 @@ package coinpurse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
+import java.util.Comparator;
 
-public class Purse {
+public class Purse  {
 	private int capacity;
 	private double balance;
-	List<Coin> money = new ArrayList<Coin>();
+	List<Valuable> money = new ArrayList<Valuable>();
 	
 	Purse(int capacity) {
 		this.capacity = capacity;
@@ -18,7 +19,8 @@ public class Purse {
 	}
 
 	public double getBalance(){
-		for( Coin c : money ){
+		balance = 0;
+		for( Valuable c : money ){
 			balance += c.getValue();
 		}
 		return balance;
@@ -33,33 +35,36 @@ public class Purse {
 		return false;
 	}
 
-	public boolean insert(Coin coin) {
+	public boolean insert(Valuable valuable) {
 		if (isFull()) return false;
-		if (coin.getValue() <= 0) return false;
-		money.add(coin); 
+		if (valuable.getValue() <= 0) return false;
+		money.add(valuable); 
 		return true;
 	}
 
-	public Coin[] withdraw(double amount) {
-		List<Coin> templist = new ArrayList<Coin>();
+	public Valuable[] withdraw(double amount) {
+		List<Valuable> templist = new ArrayList<Valuable>();
 		money.addAll(templist);
-		Collections.sort(templist);
+		Collections.sort(templist, new CompareValuable());
 		Collections.reverse(templist);
-		for( Coin c : templist ){
+		for( Valuable c : money ){
 			if(c.getValue()<=amount){
 				amount -= c.getValue();
 				templist.add(c);
 			}
 		}
+		
+		System.out.println(templist.size());
+		
 		if(amount == 0){
-			for(Coin c : templist){
+			for(Valuable c : templist){
 				if(money.contains(c)){
 					money.remove(c);
 				}
 			}
-			Coin[] coin = new Coin[templist.size()];
-			templist.toArray(coin);
-			return coin;
+			Valuable[] valuable = new Valuable[templist.size()];
+			templist.toArray(valuable);
+			return valuable;
 		}
 		else return null;
 	}
@@ -68,6 +73,14 @@ public class Purse {
 	public String toString() {
 		return "Purse [capacity=" + capacity + ", balance=" + balance + ", money=" + money + "]";
 	}
+}
+class CompareValuable implements Comparator<Valuable>{
 
-
+	@Override
+	public int compare(Valuable o1, Valuable o2) {
+		if(o1.getValue()<o2.getValue()) return -1;
+		else if(o1.getValue()>o2.getValue()) return 1;
+		else return 0;
+	}
+	
 }

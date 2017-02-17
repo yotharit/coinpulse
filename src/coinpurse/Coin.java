@@ -4,7 +4,7 @@ package coinpurse;
  * @author Tharit Pongsaneh
  * 
  */
-public class Coin implements Comparable {
+public class Coin implements Comparable,Valuable {
 	
 	/** variable use for coin class */
 	private double value;
@@ -22,11 +22,13 @@ public class Coin implements Comparable {
 	}
 	
 	/** get value of the coin*/	
+	@Override
 	public double getValue() {
 		return value;
 	}
 	
 	/** get currency of the coin*/
+	@Override
 	public String getCurrency() {
 		return currency;
 	}
