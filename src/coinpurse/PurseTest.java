@@ -16,72 +16,72 @@ import org.junit.Test;
 public class PurseTest {
 	/** tolerance for comparing two double values */
 	private static final double TOL = 1.0E-6;
-    /**
-     * Sets up the test fixture.
-     * Called before every test case method.
-     */
-    @Before
-    public void setUp()
-    {
-    }
+	/**
+	 * Sets up the test fixture.
+	 * Called before every test case method.
+	 */
+	@Before
+	public void setUp()
+	{
+	}
 
-    /** Easy test that the Purse constructor is working. */
-    @Test
-    public void testConstructor()
-    {
-        Purse purse = new Purse(3);
-        assertEquals(3, purse.getCapacity());
-        assertEquals(false, purse.isFull());
-        assertEquals(0, purse.count());
-    }
-
-    
-
-    /** Insert some coins. Easy test. */
-    @Test
-    public void testInsert()
-    {
-        Purse purse = new Purse(3);
-        Coin coin1 = new Coin(5);
-        Coin coin2 = new Coin(10);
-        Coin coin3 = new Coin(1);
-        assertTrue( purse.insert(coin1));
-        assertTrue( purse.insert(coin3));
-        assertTrue( purse.insert(coin2));
-        assertEquals( 3, purse.count() );
-        // purse is full so insert should fail
-        assertFalse( purse.insert(new Coin(1)) );
-    }
-    
-
-    /** Insert should reject coin with no value. */
-    @Test
-    public void testInsertNoValue()
-    {
-        Purse purse = new Purse(3);
-        Coin fakeCoin = new Coin(0);
-        assertFalse( purse.insert(fakeCoin));
-    }
+	/** Easy test that the Purse constructor is working. */
+	@Test
+	public void testConstructor()
+	{
+		Purse purse = new Purse(3);
+		assertEquals(3, purse.getCapacity());
+		assertEquals(false, purse.isFull());
+		assertEquals(0, purse.count());
+	}
 
 
-    @Test
-    public void testIsFull()
-    {   // borderline case (capacity 1)
-        Purse purse = new Purse(1);
-        assertFalse( purse.isFull() );
-        purse.insert( new Coin(1) );
-        assertTrue( purse.isFull() );
-        // real test
-        int capacity = 4;
-        purse = new Purse(capacity);
-        for(int k=1; k<=capacity; k++) {
-            assertFalse(purse.isFull());
-            purse.insert( new Coin(k) );
-        }
-        // full now
-        assertTrue( purse.isFull() );
-        assertFalse( purse.insert( new Coin(5) ) );
-    }
+
+	/** Insert some coins. Easy test. */
+	@Test
+	public void testInsert()
+	{
+		Purse purse = new Purse(3);
+		Coin coin1 = new Coin(5);
+		Coin coin2 = new Coin(10);
+		Coin coin3 = new Coin(1);
+		assertTrue( purse.insert(coin1));
+		assertTrue( purse.insert(coin3));
+		assertTrue( purse.insert(coin2));
+		assertEquals( 3, purse.count() );
+		// purse is full so insert should fail
+		assertFalse( purse.insert(new Coin(1)) );
+	}
+
+
+	/** Insert should reject coin with no value. */
+	@Test
+	public void testInsertNoValue()
+	{
+		Purse purse = new Purse(3);
+		Coin fakeCoin = new Coin(0);
+		assertFalse( purse.insert(fakeCoin));
+	}
+
+
+	@Test
+	public void testIsFull()
+	{   // borderline case (capacity 1)
+		Purse purse = new Purse(1);
+		assertFalse( purse.isFull() );
+		purse.insert( new Coin(1) );
+		assertTrue( purse.isFull() );
+		// real test
+		int capacity = 4;
+		purse = new Purse(capacity);
+		for(int k=1; k<=capacity; k++) {
+			assertFalse(purse.isFull());
+			purse.insert( new Coin(k) );
+		}
+		// full now
+		assertTrue( purse.isFull() );
+		assertFalse( purse.insert( new Coin(5) ) );
+	}
 
 	/** Should be able to insert same coin many times,
 	 *  since spec doesn't say anything about this.
@@ -146,7 +146,7 @@ public class PurseTest {
 		purse.insert( new Coin(20) );
 		assertNull( purse.withdraw(30) );
 	}
-	
+
 	/**
 	 * Sum the value of some coins.
 	 * @param coins array of coins

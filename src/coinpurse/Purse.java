@@ -8,7 +8,7 @@ public class Purse  {
 	private int capacity;
 	private double balance;
 	List<Valuable> money = new ArrayList<Valuable>();
-	
+
 	Purse(int capacity) {
 		this.capacity = capacity;
 		this.balance = 0;
@@ -53,9 +53,9 @@ public class Purse  {
 				templist.add(c);
 			}
 		}
-		
+
 		System.out.println(templist.size());
-		
+
 		if(amount == 0){
 			for(Valuable c : templist){
 				if(money.contains(c)){
@@ -82,5 +82,5 @@ class CompareValuable implements Comparator<Valuable>{
 		else if(o1.getValue()>o2.getValue()) return 1;
 		else return 0;
 	}
-	
+
 }

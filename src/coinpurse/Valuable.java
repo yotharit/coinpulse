@@ -1,6 +1,6 @@
 package coinpurse;
 
-public interface Valuable {
+public interface Valuable extends Comparable<Object> {
 	
 	/**
 	 * Get the monetary value of this object, in its own currency.
@@ -27,4 +27,6 @@ public interface Valuable {
 	 * @return boolean object equals or not
 	 */
 	public boolean equals(Object object);
+	
+	public int compareTo(Object obj);
 }

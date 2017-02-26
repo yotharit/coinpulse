@@ -58,7 +58,7 @@ public class CoinUtil {
 	 * Hint: this is easy if you sort the coins by currency first. :-)
 	 */
 	public static void sumByCurrency(List<Valuable> valuable) {
-		
+
 		Map<String, Double> moneyMap = new HashMap<String, Double>();
 		for(Valuable value: valuable){
 			String currency = value.getCurrency();
