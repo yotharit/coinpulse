@@ -24,11 +24,11 @@ public class ThaiMoneyFactory extends MoneyFactory {
 			if(value>10) {
 				nextSerialNumber++;
 				long serialNumber = nextSerialNumber;
-				BankNote bank = new BankNote(value,CURRENCY,serialNumber);
+				Valuable bank = new BankNote(value,CURRENCY,serialNumber);
 				return bank;
 			}
 			else {
-				Coin coin = new Coin(value,CURRENCY,SECOND_CURRENCY);
+				Valuable coin = new Coin(value,CURRENCY,SECOND_CURRENCY);
 				return coin;
 			}
 		}

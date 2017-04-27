@@ -1,5 +1,9 @@
 package coinpurse;
 import java.util.ResourceBundle;
+
+import coinpurse.gui.PurseObserver;
+import coinpurse.gui.PurseStatusObserver;
+
 import java.util.Date;
 
 public class Main {
@@ -27,7 +31,13 @@ public class Main {
 		
 		//To Run the code
 		Purse purse = new Purse( 10 );
+		PurseObserver observer = new PurseObserver();
+		PurseStatusObserver statusobserver = new PurseStatusObserver();
+		purse.addObserver(statusobserver);
+		purse.addObserver(observer);
 		ConsoleDialog console = new ConsoleDialog( purse );
+		observer.run();
+		statusobserver.run();
 		console.run();
 //				MoneyFactory factory = MoneyFactory.getInstance();
 //				Valuable m = factory.createMoney(0.25);

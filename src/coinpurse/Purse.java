@@ -1,10 +1,11 @@
 package coinpurse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Purse  {
+public class Purse extends Observable {
 	private int capacity;
 	private double balance;
 	List<Valuable> money = new ArrayList<Valuable>();
@@ -38,7 +39,9 @@ public class Purse  {
 	public boolean insert(Valuable valuable) {
 		if (isFull()) return false;
 		if (valuable.getValue() <= 0) return false;
-		money.add(valuable); 
+		money.add(valuable);
+		setChanged();
+		notifyObservers();
 		return true;
 	}
 
@@ -53,9 +56,6 @@ public class Purse  {
 				templist.add(c);
 			}
 		}
-
-		System.out.println(templist.size());
-
 		if(amount == 0){
 			for(Valuable c : templist){
 				if(money.contains(c)){
@@ -64,6 +64,8 @@ public class Purse  {
 			}
 			Valuable[] valuable = new Valuable[templist.size()];
 			templist.toArray(valuable);
+			setChanged();
+			notifyObservers();
 			return valuable;
 		}
 		else return null;
@@ -73,6 +75,8 @@ public class Purse  {
 	public String toString() {
 		return "Purse [capacity=" + capacity + ", balance=" + balance + ", money=" + money + "]";
 	}
+
+
 }
 class CompareValuable implements Comparator<Valuable>{
 
