@@ -52,7 +52,6 @@ public class PurseStatusObserver extends JFrame implements Observer {
 			else if(purse.isFull()){
 				label.setText("Full");
 			}
-			System.out.println(size);
 			progress.setValue((int)size);
 
 		}

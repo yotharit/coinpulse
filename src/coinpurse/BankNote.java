@@ -3,6 +3,9 @@ package coinpurse;
 public class BankNote extends AbstractValuable {
 	
 	private long serialNumber;
+	public BankNote(double value){
+		super(value);
+	}
 	
 	public BankNote(double value, long serialNumber){
 		super(value);

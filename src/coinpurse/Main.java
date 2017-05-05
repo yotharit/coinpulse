@@ -1,10 +1,13 @@
 package coinpurse;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import coinpurse.gui.PurseObserver;
 import coinpurse.gui.PurseStatusObserver;
-
-import java.util.Date;
+import coinpurse.strategy.GreedyWithdraw;
+import coinpurse.strategy.RecursiveWithdraw;
 
 public class Main {
 
@@ -19,7 +22,7 @@ public class Main {
 			instance = (MoneyFactory)Class.forName(factoryclass).newInstance();
 		}
 		catch (ClassCastException cce) {
-			//the object could not be cast to type MoneyFactory
+			//the object could not be cast tow type MoneyFactory
 			System.out.println(factoryclass+" is not type MoneyFactory");
 		}
 		catch (Exception ex) {
@@ -30,20 +33,17 @@ public class Main {
 		if (instance==null) System.exit(1);
 		
 		//To Run the code
-		Purse purse = new Purse( 10 );
+		Purse purse = new Purse( CAPACITY );
 		PurseObserver observer = new PurseObserver();
 		PurseStatusObserver statusobserver = new PurseStatusObserver();
 		purse.addObserver(statusobserver);
 		purse.addObserver(observer);
 		ConsoleDialog console = new ConsoleDialog( purse );
+		GreedyWithdraw greedyStrategy = new GreedyWithdraw();
+		RecursiveWithdraw recursiveStrategy = new RecursiveWithdraw();
+		purse.setWithdrawStrategy(recursiveStrategy);
 		observer.run();
 		statusobserver.run();
 		console.run();
-//				MoneyFactory factory = MoneyFactory.getInstance();
-//				Valuable m = factory.createMoney(0.25);
-//				System.out.println(m.toString());
-//				Valuable m2 = factory.createMoney("100.0");
-//				System.out.println(m2.toString());
-//				
-	}
+		}
 }
